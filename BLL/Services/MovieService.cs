@@ -21,12 +21,12 @@ namespace BLL.Services
 
          public void Create(Movie m)
         {
-            throw new NotImplementedException();
+            _movieRepo.Create(m.ToDal());
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _movieRepo.Delete(id);
         }
 
         public IEnumerable<Movie> GetAll()
@@ -41,7 +41,7 @@ namespace BLL.Services
 
         public void Update(Movie m)
         {
-            throw new NotImplementedException();
+            _movieRepo.Update(m.ToDal());
         }
     }
 }

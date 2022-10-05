@@ -57,9 +57,13 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="StoredProcedure" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Movie.sql" />
+    <Build Include="Tables\User.sql" />
+    <Build Include="StoredProcedure\RegisterUser.sql" />
+    <Build Include="StoredProcedure\Login.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

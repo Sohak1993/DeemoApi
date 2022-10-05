@@ -15,6 +15,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IMovieRepo, MovieRepo>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepo, UserRepo>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

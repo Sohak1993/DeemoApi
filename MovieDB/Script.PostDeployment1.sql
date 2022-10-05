@@ -14,3 +14,6 @@ INSERT INTO Movie (Title, Synopsis, ReleaseYear, PEGI) VALUES
 ('Star Wars : New Hope', 'Han et ChewBacca cherche la princesse pour la...', 1977,6),
 ('LOTR : La communauté de l''anneau', '9 Pecnos partent pour un suicide collectif', 2001,6),
 ('Matrix', 'Fallait pas prendre la pillule bleue', 1999,16)
+
+INSERT INTO [User] (Name, Email, Password, IsAdmin) VALUES
+('Mehdy', 'mehdy.maessckal@gmail.com', 'azerty', 1)

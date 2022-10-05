@@ -18,7 +18,6 @@ namespace DAL.Repositories
         public MovieRepo(IConfiguration config)
         {
             _connectionString = config.GetConnectionString("default");
-
         }
 
         protected Movie Converter(IDataReader reader)
@@ -35,12 +34,36 @@ namespace DAL.Repositories
 
         public void Create(Movie m)
         {
-            throw new NotImplementedException();
+            using(SqlConnection cnx = new SqlConnection(_connectionString))
+            {
+                using(SqlCommand cmd = cnx.CreateCommand())
+                {
+                    cmd.CommandText = "INSERT INTO Movie (Title, Synopsis, ReleaseYear, PEGI) VALUES(@Title, @Synopsis, @ReleaseYear, @PEGI)";
+                    cmd.Parameters.AddWithValue("Title", m.Title);
+                    cmd.Parameters.AddWithValue("Synopsis", m.Synopsis);
+                    cmd.Parameters.AddWithValue("ReleaseYear", (int) m.ReleaseYear);
+                    cmd.Parameters.AddWithValue("PEGI", (int) m.PEGI);
+
+                    cnx.Open();
+                    cmd.ExecuteNonQuery();
+                    cnx.Close();
+                }
+            }
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection cnx = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = cnx.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Movie WHERE id = @Id";
+                    cmd.Parameters.AddWithValue("Id", id);
+                    cnx.Open();
+                    cmd.ExecuteNonQuery();
+                    cnx.Close();
+                }
+            }
         }
 
         public IEnumerable<Movie> GetAll()
@@ -75,7 +98,7 @@ namespace DAL.Repositories
                     {
                         if (!reader.Read())
                         {
-                            throw new NullReferenceException();
+                            throw new NullReferenceException("Movie inexistant");
                         }
                         return Converter(reader);
                     }
@@ -85,7 +108,22 @@ namespace DAL.Repositories
 
         public void Update(Movie m)
         {
-            throw new NotImplementedException();
+            using (SqlConnection cnx = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = cnx.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE Movie SET Title = @Title, Synopsis = @Synopsis, ReleaseYear = @ReleaseYear, PEGI = @pegi WHERE id = @id";
+                    cmd.Parameters.AddWithValue("Title", m.Title);
+                    cmd.Parameters.AddWithValue("Synopsis", m.Synopsis);
+                    cmd.Parameters.AddWithValue("ReleaseYear", (int)m.ReleaseYear);
+                    cmd.Parameters.AddWithValue("PEGI", (int)m.PEGI);
+                    cmd.Parameters.AddWithValue("id", (int)m.Id);
+
+                    cnx.Open();
+                    cmd.ExecuteNonQuery();
+                    cnx.Close();
+                }
+            }
         }
     }
 }

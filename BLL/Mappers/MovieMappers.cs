@@ -22,5 +22,16 @@ namespace BLL.Mappers
                 ReleaseYear = movie.ReleaseYear
             };
         }
+
+        public static DALM.Movie ToDal(this BLLM.Movie movie)
+        {
+            return new DALM.Movie
+            {
+                Title = movie.Title,
+                Synopsis = movie.Synopsis,
+                PEGI = movie.PEGI,
+                ReleaseYear = movie.ReleaseYear
+            };
+        }
     }
 }
